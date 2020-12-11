@@ -11,7 +11,7 @@ int length(unsigned n, int base)
 // n    - decimal number
 // base - number from 2 to 36(included)
 // reg  - register, 1 uppercase, 0 lowercase (isupper('X'))
-char *converter(unsigned long long n, int base, int reg)
+char *converter(unsigned long n, int base, int reg)
 {
   char *num;
   int len, digit;
@@ -36,7 +36,6 @@ char *converter(unsigned long long n, int base, int reg)
 
 int main()
 {
-	int n = 99999999;
-
+	int n = -1;
 	printf("%s\n%x\n", converter(n, 16, 0), n);
 }
