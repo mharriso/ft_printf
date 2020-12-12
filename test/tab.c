@@ -47,11 +47,18 @@ char **create_format(char type)
 {
 	print_title(type);
 	char **format;
-	int	 width[5] = {-10, 0 , 10};
 	int j = 0;
+
+	int	 width[5] = {-10, 0 , 10};
+	int	 precision[5] = {-15, 0 , 15};
+
 	format = calloc(100, sizeof(char *));
 	for(int i = 0; i < 3; i++, j++)
-		asprintf(&format[j], "WIDTH = %4d  RES: |%%%d%c|\n", width[i], width[i], type);
+		asprintf(&format[j], " W = %4d |          | RES: |%%%d%c%s\n", width[i], width[i], type, DOLLAR);
+	for(int i = 0; i < 3; i++, j++)
+		asprintf(&format[j], "          | P = %4d | RES: |%%.%d%c%s\n", precision[i], precision[i], type, DOLLAR);
+	for(int i = 0; i < 3; i++, j++)
+		asprintf(&format[j], " W = %4d | P = %4d | RES: |%%%d.%d%c%s\n", width[i], precision[i], width[i], precision[i], type, DOLLAR);
 	return format;
 
 }
@@ -68,19 +75,11 @@ int main()
 	for(int i = 0; format[i]; i++)
 		printf(format[i], "string");
 
-	format = create_format('i');
-	for(int i = 0; format[i]; i++)
-		printf(format[i], 123);
-
 	format = create_format('d');
-	for(int i = 0; format[i]; i++)
-		printf(format[i], 123);
-
-	format = create_format('x');
 	for(int i = 0; format[i]; i++)
 		printf(format[i], 123);
 
 	format = create_format('X');
 	for(int i = 0; format[i]; i++)
-		printf(format[i], 123);
+		printf(format[i], 12345678);
 }
