@@ -31,55 +31,91 @@
 void print_title(char type)
 {
 	int size = 15;
+	int line = size*5-3;
 	printf("\n"YELLOW);
-	for(int i = 0; i < size*4-2; i++)
+	for(int i = 0; i < line; i++)
 		printf("-");
 	printf("\n");
 	for(int i = 0; i < size; i++)
-		printf("%%%c  ", type);
+		printf("%%%c   ", type);
 	printf("\n");
-	for(int i = 0; i < size*4-2; i++)
+	for(int i = 0; i < line; i++)
 		printf("-");
-	printf(RESET"\n\n");
+	printf("\n    M    |    Z    |    W    |    P    |            R E S U L T  \n"RESET);
 }
 
+void	clean(char **arr)
+{
+	for(int i = 0; arr[i]; i++)
+		free(arr[i]);
+	//free(arr);
+}
 char **create_format(char type)
 {
 	print_title(type);
 	char **format;
 	int j = 0;
 
-	int	 width[5] = {-10, 0 , 10};
-	int	 precision[5] = {-15, 0 , 15};
+	int	 w[5] = {-30, 0 , 25};
+	int	 p[5] = {-35, 0 , 25};
 
 	format = calloc(100, sizeof(char *));
 	for(int i = 0; i < 3; i++, j++)
-		asprintf(&format[j], " W = %4d |          | RES: |%%%d%c%s\n", width[i], width[i], type, DOLLAR);
+		asprintf(&format[j], "%9s|%9s| %7d |%9s| %%%d%c%s\n","","", w[i],"",  w[i], type, DOLLAR);
 	for(int i = 0; i < 3; i++, j++)
-		asprintf(&format[j], "          | P = %4d | RES: |%%.%d%c%s\n", precision[i], precision[i], type, DOLLAR);
+		asprintf(&format[j], "%9s|%9s|%9s| %7d | %%.%d%c%s\n","","","", p[i], p[i], type, DOLLAR);
 	for(int i = 0; i < 3; i++, j++)
-		asprintf(&format[j], " W = %4d | P = %4d | RES: |%%%d.%d%c%s\n", width[i], precision[i], width[i], precision[i], type, DOLLAR);
+		asprintf(&format[j], "%9s|%9s| %7d | %7d | %%%d.%d%c%s\n","","", w[i], p[i], w[i], p[i], type, DOLLAR);
 	return format;
+}
 
+#define STR 's'
+#define CHR 'c'
+#define INT 'd'
+#define PTR 'p'
+#define UNS 'u'
+#define hex 'x'
+#define HEX 'X'
+
+void	print_tab(char type, void *data)
+{
+	char **format;
+
+	switch (type)
+	{
+	case 's':
+	case 'p':
+		format = create_format(type);
+		for(int i = 0; format[i]; i++)
+			printf(format[i], data);
+		clean(format);
+		break;
+
+	default:
+		format = create_format(type);
+		for(int i = 0; format[i]; i++)
+			printf(format[i], *(int*)data);
+		clean(format);
+		break;
+	}
 }
 
 int main()
 {
-	char **format;
+	char		**format;
+	int			i = 11;
+	char		c = 'u';
+	unsigned	u = INT_MAX + (unsigned)66;
 
-	format = create_format('c');
-	for(int i = 0; format[i]; i++)
-		printf(format[i], 'A');
+	print_tab(STR, "string");
+	// print_tab(PTR, &i);
+	// print_tab(HEX, &i);
+	//aaa(INT, &i);
+	//aaa(CHR, &c);
+	//aaa('X', &i);
 
-	format = create_format('s');
-	for(int i = 0; format[i]; i++)
-		printf(format[i], "string");
+	// format = create_format('p');
+	// for(int i = 0; format[i]; i++)
+	// 	printf(format[i], &i);
 
-	format = create_format('d');
-	for(int i = 0; format[i]; i++)
-		printf(format[i], 123);
-
-	format = create_format('X');
-	for(int i = 0; format[i]; i++)
-		printf(format[i], 12345678);
 }
