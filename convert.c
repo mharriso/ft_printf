@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int length(unsigned n, int base)
+int length(unsigned long n, int base)
 {
   int i = 1;
   while(n /= base)
@@ -37,5 +37,5 @@ char *converter(unsigned long n, int base, int reg)
 int main()
 {
 	int n = -1;
-	printf("%s\n%x\n", converter(n, 16, 0), n);
+	printf("%s\n%p\n", converter(n, 16, 0), &n);
 }

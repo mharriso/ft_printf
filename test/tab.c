@@ -41,7 +41,7 @@ void print_title(char type)
 	printf("\n");
 	for(int i = 0; i < line; i++)
 		printf("-");
-	printf("\n    M    |    Z    |    W    |    P    |            R E S U L T  \n"RESET);
+	printf("\n     M     |     Z     |     W     |     P     |            R E S U L T  \n"RESET);
 }
 
 void	clean(char **arr)
@@ -56,16 +56,20 @@ char **create_format(char type)
 	char **format;
 	int j = 0;
 
-	int	 w[5] = {-30, 0 , 25};
-	int	 p[5] = {-35, 0 , 25};
+	int	 w[5] = {-40, 0 , 4};
+	int	 p[5] = {-3, 0 , 2};
 
 	format = calloc(100, sizeof(char *));
 	for(int i = 0; i < 3; i++, j++)
-		asprintf(&format[j], "%9s|%9s| %7d |%9s| %%%d%c%s\n","","", w[i],"",  w[i], type, DOLLAR);
+		asprintf(&format[j], "%10s |%10s |%10s |%10d | %%.%d%c%s\n","","","", p[i], p[i], type, DOLLAR);
 	for(int i = 0; i < 3; i++, j++)
-		asprintf(&format[j], "%9s|%9s|%9s| %7d | %%.%d%c%s\n","","","", p[i], p[i], type, DOLLAR);
+		asprintf(&format[j], "%10s |%10s |%10d |%10s | %%%d%c%s\n","","", w[i],"",  w[i], type, DOLLAR);
 	for(int i = 0; i < 3; i++, j++)
-		asprintf(&format[j], "%9s|%9s| %7d | %7d | %%%d.%d%c%s\n","","", w[i], p[i], w[i], p[i], type, DOLLAR);
+		asprintf(&format[j], "%10s |%10s |%10d |%10d | %%%d.%d%c%s\n","","", w[i], p[i], w[i], p[i], type, DOLLAR);
+	for(int i = 0; i < 3; i++, j++)
+		asprintf(&format[j], "%10s |%10s |%10d |%10d | %%0%d.%d%c%s\n","","0", w[i], p[i], w[i], p[i], type, DOLLAR);
+	for(int i = 0; i < 3; i++, j++)
+		asprintf(&format[j], "%10s |%10s |%10d |%10d | %%-%d.%d%c%s\n","-","0", w[i], p[i], w[i], p[i], type, DOLLAR);
 	return format;
 }
 
@@ -103,14 +107,14 @@ void	print_tab(char type, void *data)
 int main()
 {
 	char		**format;
-	int			i = 11;
+	int			i = 112121;
 	char		c = 'u';
 	unsigned	u = INT_MAX + (unsigned)66;
 
-	print_tab(STR, "string");
+	print_tab(STR, "abcdef");
 	// print_tab(PTR, &i);
 	// print_tab(HEX, &i);
-	//aaa(INT, &i);
+	//print_tab(INT, &i);
 	//aaa(CHR, &c);
 	//aaa('X', &i);
 
