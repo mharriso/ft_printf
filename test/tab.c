@@ -57,7 +57,7 @@ char **create_format(char type)
 	int j = 0;
 
 	int	 w[5] = {-40, 0 , 4};
-	int	 p[5] = {-3, 0 , 2};
+	int	 p[5] = {-30, 0 , 2};
 
 	format = calloc(100, sizeof(char *));
 	for(int i = 0; i < 3; i++, j++)
@@ -77,7 +77,7 @@ char **create_format(char type)
 #define CHR 'c'
 #define INT 'd'
 #define PTR 'p'
-#define UNS 'u'
+#define UINT 'u'
 #define hex 'x'
 #define HEX 'X'
 
@@ -107,14 +107,14 @@ void	print_tab(char type, void *data)
 int main()
 {
 	char		**format;
-	int			i = 112121;
+	unsigned int			i = -1;
 	char		c = 'u';
-	unsigned	u = INT_MAX + (unsigned)66;
+	unsigned	u = (unsigned)INT_MAX + (unsigned)66;
 
-	print_tab(STR, "abcdef");
+	//print_tab(STR, "abcdef");
 	// print_tab(PTR, &i);
-	// print_tab(HEX, &i);
-	//print_tab(INT, &i);
+	//print_tab(HEX, &i);
+	print_tab(UINT, &i);
 	//aaa(CHR, &c);
 	//aaa('X', &i);
 

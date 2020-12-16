@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "ft_printf.h"
 
 int length(unsigned long n, int base)
 {
@@ -34,8 +35,8 @@ char *converter(unsigned long n, int base, int reg)
   return num;
 }
 
-int main()
-{
-	int n = -1;
-	printf("%s\n%p\n", converter(n, 16, 0), &n);
-}
+// int main()
+// {
+// 	for(unsigned n = 0; n < 99; n++)
+// 		printf("print %X - %s\n", n, converter(n, 16, 0));
+// }
