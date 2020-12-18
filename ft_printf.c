@@ -6,7 +6,7 @@
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 00:03:53 by mharriso          #+#    #+#             */
-/*   Updated: 2020/12/17 00:18:19 by mharriso         ###   ########.fr       */
+/*   Updated: 2020/12/17 16:35:41 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_printf(const char *format, ...)
 	{
 		len += write(1, format, 1);
 		if(*format == '%')
-			ft_parser(format);
+			ft_parser(&format);
 		format++;
 	}
 	return (len);

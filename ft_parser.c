@@ -6,13 +6,13 @@
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/17 00:20:02 by mharriso          #+#    #+#             */
-/*   Updated: 2020/12/17 00:20:05 by mharriso         ###   ########.fr       */
+/*   Updated: 2020/12/17 16:35:34 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_parser(const char *format)
+int	ft_parser(const char **format)
 {
 	return (0);
 }

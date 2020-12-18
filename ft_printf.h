@@ -6,6 +6,6 @@
 #include <string.h>
 
 int ft_printf(const char *format, ...);
-int	ft_parser(const char *format);
+int	ft_parser(const char **format);
 
 #endif
