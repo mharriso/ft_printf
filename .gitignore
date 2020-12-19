@@ -51,3 +51,5 @@ Module.symvers
 Mkfile.old
 dkms.conf
 ft_printf
+libft/.vscode/c_cpp_properties.json
+libft/.vscode/settings.json
