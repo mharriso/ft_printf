@@ -3,5 +3,6 @@
 
 int main()
 {
-	printf("%d\n",ft_printf("123456789\n"));
+	printf("%d\n",ft_printf("123456789%\n"));
+
 }

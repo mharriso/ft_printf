@@ -35,8 +35,8 @@ char *converter(unsigned long n, int base, int reg)
   return num;
 }
 
-int main()
-{
-	for(unsigned n = 0; n < 99; n++)
-		printf("print %X - %s\n", n, converter(n, 16, 0));
-}
+//int main()
+//{
+//	for(unsigned n = 0; n < 99; n++)
+//		printf("print %X - %s\n", n, converter(n, 16, 0));
+//}
