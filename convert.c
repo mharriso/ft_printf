@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "ft_printf.h"
 
-int length(unsigned n, int base)
+int length(unsigned long n, int base)
 {
   int i = 1;
   while(n /= base)

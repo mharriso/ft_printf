@@ -51,7 +51,6 @@ add_executable(ft_printf
         libft/ft_tolower.c
         libft/ft_toupper.c
         libft/libft.h
-        test/tab.c
         convert.c
         ft_parser.c
         ft_printf.c

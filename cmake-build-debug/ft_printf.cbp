@@ -229,9 +229,6 @@
 		<Unit filename="/Users/mharriso/Desktop/ft_printf/main.c">
 			<Option target="ft_printf"/>
 		</Unit>
-		<Unit filename="/Users/mharriso/Desktop/ft_printf/test/tab.c">
-			<Option target="ft_printf"/>
-		</Unit>
 		<Unit filename="/Users/mharriso/Desktop/ft_printf/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

@@ -1412,33 +1412,6 @@ main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/main.c.s
 .PHONY : main.c.s
 
-test/tab.o: test/tab.c.o
-
-.PHONY : test/tab.o
-
-# target to build an object file
-test/tab.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/test/tab.c.o
-.PHONY : test/tab.c.o
-
-test/tab.i: test/tab.c.i
-
-.PHONY : test/tab.i
-
-# target to preprocess a source file
-test/tab.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/test/tab.c.i
-.PHONY : test/tab.c.i
-
-test/tab.s: test/tab.c.s
-
-.PHONY : test/tab.s
-
-# target to generate assembly for a file
-test/tab.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/test/tab.c.s
-.PHONY : test/tab.c.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -1589,9 +1562,6 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... test/tab.o"
-	@echo "... test/tab.i"
-	@echo "... test/tab.s"
 .PHONY : help
 
 

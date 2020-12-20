@@ -6,22 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/Users/mharriso/Desktop/ft_printf/convert.c
-stdio.h
--
-stdlib.h
--
-ft_printf.h
-/Users/mharriso/Desktop/ft_printf/ft_printf.h
-
-/Users/mharriso/Desktop/ft_printf/ft_parser.c
-ft_printf.h
-/Users/mharriso/Desktop/ft_printf/ft_printf.h
-
-/Users/mharriso/Desktop/ft_printf/ft_printf.c
-ft_printf.h
-/Users/mharriso/Desktop/ft_printf/ft_printf.h
-
 /Users/mharriso/Desktop/ft_printf/ft_printf.h
 stdarg.h
 -
