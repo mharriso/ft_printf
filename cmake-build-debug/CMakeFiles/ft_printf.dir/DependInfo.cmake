@@ -51,7 +51,6 @@ set(CMAKE_DEPENDS_CHECK_C
   "/Users/mharriso/Desktop/ft_printf/libft/ft_tolower.c" "/Users/mharriso/Desktop/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/libft/ft_tolower.c.o"
   "/Users/mharriso/Desktop/ft_printf/libft/ft_toupper.c" "/Users/mharriso/Desktop/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/libft/ft_toupper.c.o"
   "/Users/mharriso/Desktop/ft_printf/main.c" "/Users/mharriso/Desktop/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/main.c.o"
-  "/Users/mharriso/Desktop/ft_printf/test/tab.c" "/Users/mharriso/Desktop/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/test/tab.c.o"
   )
 set(CMAKE_C_COMPILER_ID "AppleClang")
 

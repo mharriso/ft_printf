@@ -46,7 +46,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/ft_printf.dir/libft/ft_tolower.c.o"
   "CMakeFiles/ft_printf.dir/libft/ft_toupper.c.o"
   "CMakeFiles/ft_printf.dir/main.c.o"
-  "CMakeFiles/ft_printf.dir/test/tab.c.o"
   "ft_printf"
   "ft_printf.pdb"
 )

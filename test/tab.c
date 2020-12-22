@@ -56,20 +56,24 @@ char **create_format(char type)
 	char **format;
 	int j = 0;
 
-	int	 w[5] = {-8, 0 , 20};
-	int	 p[5] = {-20, 0 , 20};
-
+	int	w[6] = {5, -5 , 0, -1, -5, 2};
+	int	p[6] = {3, -5 , 5, -1, 3, 3};
+	int n = 4;
 	format = calloc(100, sizeof(char *));
-	for(int i = 0; i < 3; i++, j++)
+	for(int i = 0; i < n; i++, j++)
 		asprintf(&format[j], "%10s |%10s |%10s |%10d | %%.%d%c%s\n","","","", p[i], p[i], type, DOLLAR);
-	for(int i = 0; i < 3; i++, j++)
-		asprintf(&format[j], "%10s |%10s |%10d |%10s | %%%d%c%s\n","","", w[i],"",  w[i], type, DOLLAR);
-	for(int i = 0; i < 3; i++, j++)
-		asprintf(&format[j], "%10s |%10s |%10d |%10d | %%%d.%d%c%s\n","","", w[i], p[i], w[i], p[i], type, DOLLAR);
-	for(int i = 0; i < 3; i++, j++)
-		asprintf(&format[j], "%10s |%10s |%10d |%10d | %%0%d.%d%c%s\n","","0", w[i], p[i], w[i], p[i], type, DOLLAR);
-	for(int i = 0; i < 3; i++, j++)
-		asprintf(&format[j], "%10s |%10s |%10d |%10d | %%-%d.%d%c%s\n","-","0", w[i], p[i], w[i], p[i], type, DOLLAR);
+	for(int i = 0; i < n; i++, j++)
+	 	asprintf(&format[j], "%10s |%10s |%10d |%10s | %%%d%c%s\n","","", w[i],"",  w[i], type, DOLLAR);
+	for(int i = 0; i < n; i++, j++)
+	 	asprintf(&format[j], "%10s |%10s |%10d |%10s | %%0%d%c%s\n","","0", w[i],"",  w[i], type, DOLLAR);
+	// for(int i = 0; i < n; i++, j++)
+	// 	asprintf(&format[j], "%10s |%10s |%10d |%10s | %%-%d%c%s\n","-","", w[i],"",  w[i], type, DOLLAR);
+	// for(int i = 0; i < n; i++, j++)
+	// 	asprintf(&format[j], "%10s |%10s |%10d |%10d | %%%d.%d%c%s\n","","", w[i], p[i], w[i], p[i], type, DOLLAR);
+	// for(int i = 0; i < n; i++, j++)
+	//  	asprintf(&format[j], "%10s |%10s |%10d |%10d | %%0%d.%d%c%s\n","","0", w[i], p[i], w[i], p[i], type, DOLLAR);
+	// for(int i = 0; i < n; i++, j++)
+	// 	asprintf(&format[j], "%10s |%10s |%10d |%10d | %%-0%d.%d%c%s\n","-","0", w[i], p[i], w[i], p[i], type, DOLLAR);
 	return format;
 }
 
@@ -90,14 +94,14 @@ void	print_tab(char type, void *data)
 	case 's':
 	case 'p':
 		format = create_format(type);
-		for(int i = 0; format[i]; i++)
+		for (int i = 0; format[i]; i++)
 			printf(format[i], data);
 		clean(format);
 		break;
 
 	default:
 		format = create_format(type);
-		for(int i = 0; format[i]; i++)
+		for (int i = 0; format[i]; i++)
 			printf(format[i], *(int*)data);
 		clean(format);
 		break;
@@ -106,16 +110,17 @@ void	print_tab(char type, void *data)
 
 int main()
 {
-	char		**format;
-	unsigned int			i = 123;
-	char		c = 'u';
-	unsigned	u = 123;
+	char			**format;
+	unsigned int	i = 123;
+	char			c = 'W';
+	unsigned		u = 123;
+	int n = -12;
 
 	//print_tab(STR, "abcdef");
-	print_tab(PTR, &i);
+	print_tab(CHR, &c);
 	//print_tab(HEX, &i);
 	//print_tab(UINT, &i);
-	//print_tab(INT, &i);
+	print_tab(INT, &n);
 	//aaa(CHR, &c);
 	//aaa('X', &i);
 
