@@ -122,15 +122,6 @@ int main()
 	// print_tab(UINT, &i);
 	// print_tab(INT, &n);
 
-	// printf("%.*c$\n", 21, 'A');
-	// printf("%.*c$\n", -21, 'A');
-	// printf("%021c\n$", 'A');
-	// printf("%.*d$\n", 0, 0);
-	// printf("%.*u$\n", 0, 0);
-	// printf("%.*x$\n", 0, 0);
-	// printf("%.*X$\n", 0, 0);
-	// printf("%.*i$\n", 0, 0);
-	printf("%------------60d", 21);
 
 	// format = create_format('p');
 	// for(int i = 0; format[i]; i++)
