@@ -6,32 +6,50 @@
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 00:03:53 by mharriso          #+#    #+#             */
-/*   Updated: 2020/12/23 00:19:20 by mharriso         ###   ########.fr       */
+/*   Updated: 2020/12/23 04:40:30 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-int print_char(char c, int *flags)
+void print_fill(char c, int len)
 {
-	return (write(1, &c, 1));
+	while(len--)
+		write(1, &c, 1);
+}
+int	print_char(char c, int *flags)
+{
+	if (flags[WID])
+		flags[WID] = flags[WID] - 1;
+	if (flags[MIN])
+	{
+		(write(1, &c, 1));
+		print_fill(SPACE, flags[WID]);
+	}
+	else
+	{
+		print_fill(SPACE + flags[ZERO], flags[WID]);
+		(write(1, &c, 1));
+	}
+	return (flags[WID] + 1);
 }
 
-int print_string(va_list args, int *flags)
+int	print_string(va_list args, int *flags)
 {
-	char 	*str;
-	size_t 	len;
+	char	*str;
+	size_t	len;
+
 	str = va_arg(args, char *);
-	if(!str)
+	if (!str)
 		str = "(null)";
 	len = ft_strlen(str);
 	return (write(1, str, len));
 }
 
-int print_pointer(va_list args, int *flags)
+int	print_pointer(va_list args, int *flags)
 {
-	char 	*str;
-	size_t 	len;
+	char	*str;
+	size_t	len;
+
 	str = converter((unsigned long)va_arg(args, unsigned int*), 16, 0);
 	len = ft_strlen(str);
 	write(1, "0x", 2);
@@ -39,21 +57,22 @@ int print_pointer(va_list args, int *flags)
 	return (2 + write(1, str, len));
 }
 
-int print_hex(va_list args, int *flags, int reg)
+int	print_hex(va_list args, int *flags, int reg)
 {
-	char 			*str;
-	size_t 			len;
+	char			*str;
+	size_t			len;
 
 	str = converter(va_arg(args, unsigned int), 16, reg);
 	len = ft_strlen(str);
 	return (write(1, str, len));
 }
+
 int	print_int(va_list args, int *flags)
 {
-	char 			*str;
-	size_t 			len;
+	char			*str;
+	size_t			len;
 	long int		n;
-	int 			minus;
+	int				minus;
 
 	n = va_arg(args, int);
 	minus = n < 0;
@@ -67,16 +86,18 @@ int	print_int(va_list args, int *flags)
 	// add zeros
 	return (minus + write(1, str, len));
 }
-int print_unsigned(va_list args, int *flags)
+
+int	print_unsigned(va_list args, int *flags)
 {
-	char 			*str;
-	size_t 			len;
+	char			*str;
+	size_t			len;
 
 	str = converter(va_arg(args, unsigned int), 10, 0);
 	len = ft_strlen(str);
 	return (write(1, str, len));
 }
-int print_format_arg(char s, va_list args, int *flags)
+
+int	print_format_arg(char s, va_list args, int *flags)
 {
 	char c;
 
@@ -106,13 +127,13 @@ int	ft_printf(const char *format, ...)
 
 	len = 0;
 	va_start(args, format);
-	while(*format)
+	while (*format)
 	{
-		if((percent = ft_strchr(format, '%')))
+		if ((percent = ft_strchr(format, '%')))
 		{
 			len += write(1, format, percent - format);
 			format = percent + 1;
-			if(*format)
+			if (*format)
 			{
 				flags = ft_parser(&format, args);
 				len += print_format_arg(*(format++), args, flags);

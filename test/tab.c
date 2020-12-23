@@ -56,18 +56,18 @@ char **create_format(char type)
 	char **format;
 	int j = 0;
 
-	int	w[6] = {5, -5 , 0, -1, -5, 2};
+	int	w[6] = {10, -8 , 0, -1, -20, 2};
 	int	p[6] = {3, -5 , 5, -1, 3, 3};
 	int n = 4;
 	format = calloc(100, sizeof(char *));
-	for(int i = 0; i < n; i++, j++)
-		asprintf(&format[j], "%10s |%10s |%10s |%10d | %%.%d%c%s\n","","","", p[i], p[i], type, DOLLAR);
-	for(int i = 0; i < n; i++, j++)
-	 	asprintf(&format[j], "%10s |%10s |%10d |%10s | %%%d%c%s\n","","", w[i],"",  w[i], type, DOLLAR);
-	for(int i = 0; i < n; i++, j++)
-	 	asprintf(&format[j], "%10s |%10s |%10d |%10s | %%0%d%c%s\n","","0", w[i],"",  w[i], type, DOLLAR);
 	// for(int i = 0; i < n; i++, j++)
-	// 	asprintf(&format[j], "%10s |%10s |%10d |%10s | %%-%d%c%s\n","-","", w[i],"",  w[i], type, DOLLAR);
+	// 	asprintf(&format[j], "%10s |%10s |%10s |%10d | %%.%d%c%s\n","","","", p[i], p[i], type, DOLLAR);
+	// for(int i = 0; i < n; i++, j++)
+	//  	asprintf(&format[j], "%10s |%10s |%10d |%10s | %%%d%c%s\n","","", w[i],"",  w[i], type, DOLLAR);
+	// for(int i = 0; i < n; i++, j++)
+	//  	asprintf(&format[j], "%10s |%10s |%10d |%10s | %%0%d%c%s\n","","0", w[i],"",  w[i], type, DOLLAR);
+	for(int i = 0; i < n; i++, j++)
+		asprintf(&format[j], "%10s |%10s |%10d |%10s | %%-%d%c%s\n","-","", w[i],"",  w[i], type, DOLLAR);
 	// for(int i = 0; i < n; i++, j++)
 	// 	asprintf(&format[j], "%10s |%10s |%10d |%10d | %%%d.%d%c%s\n","","", w[i], p[i], w[i], p[i], type, DOLLAR);
 	// for(int i = 0; i < n; i++, j++)
@@ -110,19 +110,27 @@ void	print_tab(char type, void *data)
 
 int main()
 {
-	char			**format;
-	unsigned int	i = 123;
-	char			c = 'W';
-	unsigned		u = 123;
-	int n = -12;
+	// char			**format;
+	// unsigned int	i = 123;
+	// char			c = 'W';
+	// unsigned		u = 123;
+	// int 			n = -12;
 
-	//print_tab(STR, "abcdef");
-	print_tab(CHR, &c);
-	//print_tab(HEX, &i);
-	//print_tab(UINT, &i);
-	print_tab(INT, &n);
-	//aaa(CHR, &c);
-	//aaa('X', &i);
+	// print_tab(STR, "abcdef");
+	// print_tab(CHR, &c);
+	// print_tab(HEX, &i);
+	// print_tab(UINT, &i);
+	// print_tab(INT, &n);
+
+	// printf("%.*c$\n", 21, 'A');
+	// printf("%.*c$\n", -21, 'A');
+	// printf("%021c\n$", 'A');
+	// printf("%.*d$\n", 0, 0);
+	// printf("%.*u$\n", 0, 0);
+	// printf("%.*x$\n", 0, 0);
+	// printf("%.*X$\n", 0, 0);
+	// printf("%.*i$\n", 0, 0);
+	printf("%------------60d", 21);
 
 	// format = create_format('p');
 	// for(int i = 0; format[i]; i++)
