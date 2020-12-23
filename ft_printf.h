@@ -6,7 +6,7 @@
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 21:59:20 by mharriso          #+#    #+#             */
-/*   Updated: 2020/12/23 03:38:56 by mharriso         ###   ########.fr       */
+/*   Updated: 2020/12/23 04:42:51 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #define ACC		3
 #define IS_ACC	4
 #define SPACE	32
+#define ZEROS	48
 
 #include <stdarg.h>
 #include <unistd.h>
