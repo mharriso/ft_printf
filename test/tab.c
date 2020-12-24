@@ -108,23 +108,23 @@ void	print_tab(char type, void *data)
 	}
 }
 
-int main()
-{
-	// char			**format;
-	// unsigned int	i = 123;
-	// char			c = 'W';
-	// unsigned		u = 123;
-	// int 			n = -12;
+// int main()
+// {
+// 	// char			**format;
+// 	// unsigned int	i = 123;
+// 	// char			c = 'W';
+// 	// unsigned		u = 123;
+// 	// int 			n = -12;
 
-	// print_tab(STR, "abcdef");
-	// print_tab(CHR, &c);
-	// print_tab(HEX, &i);
-	// print_tab(UINT, &i);
-	// print_tab(INT, &n);
+// 	// print_tab(STR, "abcdef");
+// 	// print_tab(CHR, &c);
+// 	// print_tab(HEX, &i);
+// 	// print_tab(UINT, &i);
+// 	// print_tab(INT, &n);
 
 
-	// format = create_format('p');
-	// for(int i = 0; format[i]; i++)
-	// 	printf(format[i], &i);
+// 	// format = create_format('p');
+// 	// for(int i = 0; format[i]; i++)
+// 	// 	printf(format[i], &i);
 
-}
+// }

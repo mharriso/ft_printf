@@ -13,7 +13,7 @@ char *converter(unsigned long n, int base, int reg)
   unsigned long n_copy;
 
   if (n == 0)
-    return "0";
+    return ft_strdup("0");
   len = 1;
   n_copy = n;
   while(n_copy /= base)

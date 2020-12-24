@@ -6,70 +6,81 @@
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 00:03:53 by mharriso          #+#    #+#             */
-/*   Updated: 2020/12/23 04:40:30 by mharriso         ###   ########.fr       */
+/*   Updated: 2020/12/24 17:41:29 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+void ft_putch(char *s, int l, int *len)
+{
+	(*len) += write(1, s, l);
+}
+
 void print_fill(char c, int len)
 {
 	while(len--)
 		write(1, &c, 1);
 }
-int	print_char(char c, int *flags)
+
+int	print_char(char c,t_flags *flags)
 {
-	if (flags[WID])
-		flags[WID] = flags[WID] - 1;
-	if (flags[MIN])
+	if (flags->width)
+		flags->width = flags->width - 1;
+	if (flags->minus)
 	{
+		//ft_putch(&c, &(flags->len));
 		(write(1, &c, 1));
-		print_fill(SPACE, flags[WID]);
+		print_fill(SPACE, flags->width);
 	}
 	else
 	{
-		print_fill(SPACE + flags[ZERO], flags[WID]);
+		print_fill(SPACE + flags->zero, flags->width);
 		(write(1, &c, 1));
 	}
-	return (flags[WID] + 1);
+	if(!(flags->str = malloc(1)))
+		return (-1);
+	flags->len += flags->width + 1;
+	return (0);
 }
 
-int	print_string(va_list args, int *flags)
+int	print_string(va_list args, t_flags *flags)
 {
-	char	*str;
 	size_t	len;
+	char *str;
 
-	str = va_arg(args, char *);
+	str= va_arg(args, char *);
 	if (!str)
-		str = "(null)";
-	len = ft_strlen(str);
-	return (write(1, str, len));
+		flags->str = strdup("(null)");
+	else
+		flags->str = strdup(str);
+	len = ft_strlen(flags->str);
+	return (write(1, flags->str, len));
 }
 
-int	print_pointer(va_list args, int *flags)
+int	print_pointer(va_list args, t_flags *flags)
 {
-	char	*str;
 	size_t	len;
 
-	str = converter((unsigned long)va_arg(args, unsigned int*), 16, 0);
-	len = ft_strlen(str);
+	flags->str= converter((unsigned long)va_arg(args, unsigned int*), 16, 0);
+	len = ft_strlen(flags->str);
 	write(1, "0x", 2);
 	//add zeros
-	return (2 + write(1, str, len));
+	return (2 + write(1, flags->str, len));
 }
 
-int	print_hex(va_list args, int *flags, int reg)
+int	print_hex(va_list args, t_flags *flags, int reg)
 {
-	char			*str;
 	size_t			len;
 
-	str = converter(va_arg(args, unsigned int), 16, reg);
-	len = ft_strlen(str);
-	return (write(1, str, len));
+	if(!(flags->str = converter(va_arg(args, unsigned int), 16, reg)))
+		return (-1);
+	len = ft_strlen(flags->str);
+	flags->len += write(1, flags->str, len);
+	return (0);
 }
 
-int	print_int(va_list args, int *flags)
+int	print_int(va_list args, t_flags *flags)
 {
-	char			*str;
 	size_t			len;
 	long int		n;
 	int				minus;
@@ -81,29 +92,28 @@ int	print_int(va_list args, int *flags)
 		write(1, "-", 1);
 		n = -n;
 	}
-	str = converter(n, 10, 0);
-	len = ft_strlen(str);
+	flags->str= converter(n, 10, 0);
+	len = ft_strlen(flags->str);
 	// add zeros
-	return (minus + write(1, str, len));
+	return (minus + write(1, flags->str, len));
 }
 
-int	print_unsigned(va_list args, int *flags)
+int	print_unsigned(va_list args, t_flags *flags)
 {
-	char			*str;
 	size_t			len;
 
-	str = converter(va_arg(args, unsigned int), 10, 0);
-	len = ft_strlen(str);
-	return (write(1, str, len));
+	flags->str= converter(va_arg(args, unsigned int), 10, 0);
+	len = ft_strlen(flags->str);
+	return (write(1, flags->str, len));
 }
 
-int	print_format_arg(char s, va_list args, int *flags)
+int		print_format_arg(char s, va_list args, t_flags *flags)
 {
 	char c;
 
 	if (s == 'c' || s == '%')
 	{
-		c = (s == '%') ? '%' : va_arg(args, int);
+		c = (s == '%') ? '%' : (char)va_arg(args, int);
 		return (print_char(c, flags));
 	}
 	if (s == 's')
@@ -121,30 +131,32 @@ int	print_format_arg(char s, va_list args, int *flags)
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
-	int		len;
 	char	*percent;
-	int		*flags;
+	t_flags		flags;
+	char 	*form;
 
-	len = 0;
+	form = (char*)format;
+	flags.len = 0;
 	va_start(args, format);
 	while (*format)
 	{
 		if ((percent = ft_strchr(format, '%')))
 		{
-			len += write(1, format, percent - format);
+			flags.len += write(1, format, percent - format);
 			format = percent + 1;
 			if (*format)
 			{
-				flags = ft_parser(&format, args);
-				len += print_format_arg(*(format++), args, flags);
+				ft_parser(&form, args, &flags);
+				flags.len += print_format_arg(*(format++), args, &flags);
+				free(flags.str);
 			}
 		}
 		else
 		{
-			len += write(1, format, ft_strlen(format));
+			flags.len += write(1, format, ft_strlen(format));
 			break ;
 		}
 	}
 	va_end(args);
-	return (len);
+	return (flags.len);
 }

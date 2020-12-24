@@ -6,7 +6,7 @@
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 21:59:20 by mharriso          #+#    #+#             */
-/*   Updated: 2020/12/23 04:42:51 by mharriso         ###   ########.fr       */
+/*   Updated: 2020/12/24 17:37:45 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #define WID		2
 #define ACC		3
 #define IS_ACC	4
+
 #define SPACE	32
 #define ZEROS	48
 
@@ -27,11 +28,25 @@
 #include <string.h> //delete
 #include <limits.h> //delete
 #include "libft/libft.h"
+// cspdiuxX%
+// -0.*
+typedef struct s_flags
+{
+	char *str;
+	int minus;
+	int zero;
+	int width;
+	int acc;
+	int is_acc;
+	int len;
+
+
+} t_flags;
 
 int		ft_printf(const char *format, ...);
-int		*ft_parser(const char **format, va_list args);
+int	ft_parser(char **format, va_list args, t_flags *flags);
 char	*converter(unsigned long n, int base, int reg);
-int		print_format_arg(char s, va_list args, int *flags);
+int		print_format_arg(char s, va_list args, t_flags *flags);
 int		ft_abs(int n);
 
 #endif
