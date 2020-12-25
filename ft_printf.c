@@ -11,35 +11,41 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
 void ft_putch(char *s, int l, int *len)
 {
 	(*len) += write(1, s, l);
 }
-
-void print_fill(char c, int len)
+//ft_putch(&c, &(flags->len));
+void print_fill(char c, t_flags *flags, size_t len)
 {
-	while(len--)
+	if ((flags->width = flags->width - len) < 0)
+		flags->width = 0;
+	flags->len += flags->width;
+	while(flags->width--)
 		write(1, &c, 1);
 }
 
-int	print_char(char c,t_flags *flags)
+void set_order(char *s, t_flags *flags, size_t len)
 {
-	if (flags->width)
-		flags->width = flags->width - 1;
 	if (flags->minus)
 	{
-		//ft_putch(&c, &(flags->len));
-		(write(1, &c, 1));
-		print_fill(SPACE, flags->width);
+		(write(1, s, len));
+		print_fill(SPACE, flags, len);
 	}
 	else
 	{
-		print_fill(SPACE + flags->zero, flags->width);
-		(write(1, &c, 1));
-	}
+		print_fill(SPACE + flags->zero, flags, len);
+		(write(1, s, len));
+	}	
+}
+
+int	print_char(char c, t_flags *flags)
+{
+	set_order(&c, flags, 1);
 	if(!(flags->str = malloc(1)))
 		return (-1);
-	flags->len += flags->width + 1;
+	flags->len++;
 	return (0);
 }
 
@@ -48,24 +54,32 @@ int	print_string(va_list args, t_flags *flags)
 	size_t	len;
 	char *str;
 
-	str= va_arg(args, char *);
+	str = va_arg(args, char *);
 	if (!str)
 		flags->str = strdup("(null)");
 	else
 		flags->str = strdup(str);
+	if(!flags->str)
+		return (-1);
 	len = ft_strlen(flags->str);
-	return (write(1, flags->str, len));
+	if(flags->is_acc && flags->acc < len)
+		len = flags->acc;
+	set_order(flags->str, flags, len);
+	flags->len += len;
+	return (0);
 }
 
 int	print_pointer(va_list args, t_flags *flags)
 {
 	size_t	len;
 
-	flags->str= converter((unsigned long)va_arg(args, unsigned int*), 16, 0);
+	if(!(flags->str = converter((unsigned long)va_arg(args, unsigned int*), 16, 0)))
+		return (-1);
 	len = ft_strlen(flags->str);
 	write(1, "0x", 2);
 	//add zeros
-	return (2 + write(1, flags->str, len));
+	flags->len += 2 + write(1, flags->str, len);
+	return (0);
 }
 
 int	print_hex(va_list args, t_flags *flags, int reg)
@@ -83,28 +97,30 @@ int	print_int(va_list args, t_flags *flags)
 {
 	size_t			len;
 	long int		n;
-	int				minus;
 
 	n = va_arg(args, int);
-	minus = n < 0;
-	if (minus)
+	if (n < 0)
 	{
-		write(1, "-", 1);
+		flags->len += write(1, "-", 1);
 		n = -n;
 	}
-	flags->str= converter(n, 10, 0);
+	if(!(flags->str = converter(n, 10, 0)))
+		return (-1);
 	len = ft_strlen(flags->str);
 	// add zeros
-	return (minus + write(1, flags->str, len));
+	flags->len += write(1, flags->str, len);
+	return (0);
 }
 
 int	print_unsigned(va_list args, t_flags *flags)
 {
 	size_t			len;
 
-	flags->str= converter(va_arg(args, unsigned int), 10, 0);
+	if(!(flags->str = converter(va_arg(args, unsigned int), 10, 0)))
+		return (-1);
 	len = ft_strlen(flags->str);
-	return (write(1, flags->str, len));
+	flags->len += write(1, flags->str, len);
+	return (0);
 }
 
 int		print_format_arg(char s, va_list args, t_flags *flags)
@@ -146,7 +162,7 @@ int	ft_printf(const char *format, ...)
 			format = percent + 1;
 			if (*format)
 			{
-				ft_parser(&form, args, &flags);
+				ft_parser(&format, args, &flags);
 				flags.len += print_format_arg(*(format++), args, &flags);
 				free(flags.str);
 			}

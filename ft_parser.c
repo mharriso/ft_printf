@@ -41,7 +41,7 @@ int	ft_parser(char **format, va_list args, t_flags *flags)
 	}
 	if (flags->width < 0)
 	{
-		flags->width = -flags->width;
+		flags->width = -(flags->width);
 		flags->minus = 1;
 	}
 	while (ft_isdigit(**format))
@@ -58,6 +58,8 @@ int	ft_parser(char **format, va_list args, t_flags *flags)
 	}
 	else
 		flags->acc = ft_atoi(*format);
+	if(flags->acc < 0)
+		flags->is_acc = 0;
 	while (ft_isdigit(**format))
 		(*format)++;
 	return (0);

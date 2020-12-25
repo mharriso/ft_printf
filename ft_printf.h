@@ -40,7 +40,6 @@ typedef struct s_flags
 	int is_acc;
 	int len;
 
-
 } t_flags;
 
 int		ft_printf(const char *format, ...);
