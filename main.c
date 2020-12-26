@@ -39,7 +39,7 @@ void check()
 	printf("%20.*s$\n", -5, str);
 	printf("%------------60d", 21);
 }
-void test_char()
+void char_test()
 {
 	int a, b;
 	printf("\n"GREEN"----------------------------------CHAR---------------------------------"RESET"\n");
@@ -65,7 +65,7 @@ void test_char()
 	a = ft_printf("char: %*c$\n", -1, 'A');
 	error(a, b);
 }
-void test_string()
+void string_test()
 {
 	int a, b;
 	char *s = "Happy new year!:)";
@@ -108,6 +108,9 @@ void test_string()
 	error(a, b);
 	a = printf("%-30.*s$\n", 50, s);
 	b = ft_printf("%-30.*s$\n", 50, s);
+	error(a, b);
+	a = printf("%.-10s$\n", s);
+	b = ft_printf("%.-10s$\n", s);
 	error(a, b);
 }
 void test_basic()
@@ -161,7 +164,7 @@ void test_basic()
 	b = ft_printf("HEX: %x$ %x$ %X$\n", -1,  123456, 799999);
 	error(a, b);
 }
-void github_test_char()
+void char_github_test()
 {
 	int c1;
 	int c2;
@@ -223,7 +226,7 @@ void github_test_char()
 	c2 = ft_printf("%-0c, %-01c, %-03c, %-010c\n", 'a', 'a', 'a', 'a');
 	error(c1, c2);
 }
-void github_test_string(
+void string_github_test()
 {
 	char str[100];
 	char str1[100];
@@ -485,15 +488,15 @@ void github_test_string(
 	c2 = ft_printf("%s|%-s|%10s|%.5s|%.10s|%-10s|%-.5s|%-.10s|%10.5s|%7.10s|%-10.5s|%-7.10s|\n", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 	error(c1, c2);
 
-	printf("\n");
-	c2 = ft_printf("|%%5-s|%%5-1s|%%5-2s|%%5-5s|%%5-10s|          *|%5-s|%5-1s|%5-2s|%5-5s|%5-10s|\n", str, str, str, str, str);
-	c1 = printf("|%%5-s|%%5-1s|%%5-2s|%%5-5s|%%5-10s|           |%5-s|%5-1s|%5-2s|%5-5s|%5-10s|\n", str, str, str, str, str);
-	error(c1, c2);
+	// printf("\n");
+	// c2 = ft_printf("|%%5-s|%%5-1s|%%5-2s|%%5-5s|%%5-10s|          *|%5-s|%5-1s|%5-2s|%5-5s|%5-10s|\n", str, str, str, str, str);
+	// c1 = printf("|%%5-s|%%5-1s|%%5-2s|%%5-5s|%%5-10s|           |%5-s|%5-1s|%5-2s|%5-5s|%5-10s|\n", str, str, str, str, str);
+	// error(c1, c2);
 
-	printf("\n");
-	c2 = ft_printf("|%%-5-s|%%-5-1s|%%-5-2s|%%-5-5s|%%-5-10s|     *|%-5-s|%-5-1s|%-5-2s|%-5-5s|%-5-10s|\n", str, str, str, str, str);
-	c1 = printf("|%%-5-s|%%-5-1s|%%-5-2s|%%-5-5s|%%-5-10s|      |%-5-s|%-5-1s|%-5-2s|%-5-5s|%-5-10s|\n", str, str, str, str, str);
-	error(c1, c2);
+	// printf("\n");
+	// c2 = ft_printf("|%%-5-s|%%-5-1s|%%-5-2s|%%-5-5s|%%-5-10s|     *|%-5-s|%-5-1s|%-5-2s|%-5-5s|%-5-10s|\n", str, str, str, str, str);
+	// c1 = printf("|%%-5-s|%%-5-1s|%%-5-2s|%%-5-5s|%%-5-10s|      |%-5-s|%-5-1s|%-5-2s|%-5-5s|%-5-10s|\n", str, str, str, str, str);
+	// error(c1, c2);
 
 	printf("\n");
 	c2 = ft_printf("|%%-0-s|%%-0-1s|%%-0-2s|%%-0-5s|%%-0-10s|     *|%-0-s|%-0-1s|%-0-2s|%-0-5s|%-0-10s|\n", str, str, str, str, str);
@@ -523,9 +526,13 @@ void github_test_string(
 int main()
 {
 	//ft_printf("%*c$\n", INT_MIN, 'A');
-	// test_basic();
-	// test_char();
-	test_string();
-	// github_test_char();
+	test_basic();
+	char_test();
+	string_test();
+	char_github_test();
+	string_github_test();
+	// printf("% d\n", -12345);
+	// printf("% +d\n", 12345);
+	// printf("%                  d\n", 12345);
 	//check();
 }
