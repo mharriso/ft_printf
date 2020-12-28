@@ -6,7 +6,7 @@
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/17 00:20:02 by mharriso          #+#    #+#             */
-/*   Updated: 2020/12/27 00:17:35 by mharriso         ###   ########.fr       */
+/*   Updated: 2020/12/28 18:59:11 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int ft_abs(int n)
 }
 int	ft_parser(char **format, va_list args, t_flags *flags)
 {
-	ft_memset(flags, 0, sizeof(t_flags) - 4);
+	ft_memset(flags, 0, sizeof(t_flags) - 8);
+	flags->prefix = "";
 	while (**format == '-' || **format == '0') //ft_strchr("-0#+ ", **format)
 	{
 		if (**format == '0')
@@ -58,8 +59,6 @@ int	ft_parser(char **format, va_list args, t_flags *flags)
 	}
 	else
 		flags->acc = ft_atoi(*format);
-	if(flags->acc < 0)
-		flags->is_acc = 0;
 	if(**format == '-')
 		(*format)++;
 	while (ft_isdigit(**format))

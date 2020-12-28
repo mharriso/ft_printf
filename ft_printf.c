@@ -6,7 +6,7 @@
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 00:03:53 by mharriso          #+#    #+#             */
-/*   Updated: 2020/12/24 17:41:29 by mharriso         ###   ########.fr       */
+/*   Updated: 2020/12/28 19:17:23 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,35 +17,43 @@ void ft_putch(char *s, int l, int *len)
 	(*len) += write(1, s, l);
 }
 //ft_putch(&c, &(flags->len));
-void print_fill(char c, t_flags *flags, size_t len)
+void print_fill(char c, int amt, size_t str_len, int *len)
 {
-	if ((flags->width = flags->width - len) < 0)
-		flags->width = 0;
-	flags->len += flags->width;
-	while(flags->width--)
+	if ((amt = amt - str_len) < 0)
+		amt = 0;
+	(*len) += amt;
+	while(amt--)
 		write(1, &c, 1);
 }
 
 void set_order(char *s, t_flags *flags, size_t len)
 {
+	int a;
+
+	if ((a = flags->acc - len) < 0)
+			a = 0;
 	if (flags->minus)
 	{
-		(write(1, s, len));
-		print_fill(SPACE, flags, len);
+		flags->len += write(1, flags->prefix, flags->p_len);
+		print_fill(ZERO, flags->acc, len, &(flags->len));
+		flags->len += (write(1, s, len));
+		print_fill(SPACE + flags->zero, flags->width, len + flags->p_len + a, &(flags->len));
 	}
 	else
 	{
-		print_fill(SPACE + flags->zero, flags, len);
-		(write(1, s, len));
-	}	
+		print_fill(SPACE + flags->zero, flags->width, len + flags->p_len + a, &(flags->len));
+		flags->len += write(1, flags->prefix, flags->p_len);
+		print_fill(ZERO, flags->acc, len, &(flags->len));
+		flags->len += (write(1, s, len));
+	}
 }
 
 int	print_char(char c, t_flags *flags)
 {
+	flags->acc = 0;
 	set_order(&c, flags, 1);
 	if(!(flags->str = malloc(1)))
 		return (-1);
-	flags->len++;
 	return (0);
 }
 
@@ -64,62 +72,85 @@ int	print_string(va_list args, t_flags *flags)
 	len = ft_strlen(flags->str);
 	if(flags->is_acc && flags->acc < len)
 		len = flags->acc;
+	flags->acc = 0;
 	set_order(flags->str, flags, len);
-	flags->len += len;
 	return (0);
 }
 
 int	print_pointer(va_list args, t_flags *flags)
 {
-	size_t	len;
+	unsigned long p;
 
-	if(!(flags->str = converter((unsigned long)va_arg(args, unsigned int*), 16, 0)))
+	p = (unsigned long)va_arg(args, unsigned int*);
+	if(flags->is_acc && flags->acc == 0 && p == 0)
+		flags->str = strdup("");
+	else
+		flags->str = converter(p, 16, 0);
+	if(!flags->str)
 		return (-1);
-	len = ft_strlen(flags->str);
-	write(1, "0x", 2);
-	//add zeros
-	flags->len += 2 + write(1, flags->str, len);
+	if(flags->is_acc)
+		flags->zero = 0;
+	flags->prefix = "0x";
+	flags->p_len = 2;
+	set_order(flags->str, flags, ft_strlen(flags->str));
 	return (0);
 }
 
 int	print_hex(va_list args, t_flags *flags, int reg)
 {
-	size_t			len;
+	unsigned	long	hex;
 
-	if(!(flags->str = converter(va_arg(args, unsigned int), 16, reg)))
+	hex = va_arg(args, unsigned int);
+	if(flags->is_acc && flags->acc == 0 && hex == 0)
+		flags->str = strdup("");
+	else
+		flags->str = converter(hex, 16, reg);
+	if(!flags->str)
 		return (-1);
-	len = ft_strlen(flags->str);
-	flags->len += write(1, flags->str, len);
+	if(flags->is_acc)
+		flags->zero = 0;
+	set_order(flags->str, flags, ft_strlen(flags->str));
 	return (0);
 }
 
 int	print_int(va_list args, t_flags *flags)
 {
-	size_t			len;
 	long int		n;
 
 	n = va_arg(args, int);
 	if (n < 0)
 	{
-		flags->len += write(1, "-", 1);
+		flags->prefix = "-";
+		flags->p_len = 1;
 		n = -n;
 	}
-	if(!(flags->str = converter(n, 10, 0)))
+	if(flags->is_acc && flags->acc == 0 && n == 0)
+		flags->str = strdup("");
+	else
+		flags->str = converter(n, 10, 0);
+	if(!flags->str)
 		return (-1);
-	len = ft_strlen(flags->str);
-	// add zeros
-	flags->len += write(1, flags->str, len);
+	if(flags->is_acc)
+		flags->zero = 0;
+	set_order(flags->str, flags, ft_strlen(flags->str));
 	return (0);
 }
 
 int	print_unsigned(va_list args, t_flags *flags)
 {
-	size_t			len;
 
-	if(!(flags->str = converter(va_arg(args, unsigned int), 10, 0)))
+	unsigned	long	u;
+
+	u = va_arg(args, unsigned int);
+	if(flags->is_acc && flags->acc == 0 && u == 0)
+		flags->str = strdup("");
+	else
+		flags->str = converter(u, 10, 0);
+	if(!flags->str)
 		return (-1);
-	len = ft_strlen(flags->str);
-	flags->len += write(1, flags->str, len);
+	if(flags->is_acc)
+		flags->zero = 0;
+	set_order(flags->str, flags, ft_strlen(flags->str));
 	return (0);
 }
 

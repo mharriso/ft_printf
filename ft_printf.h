@@ -6,21 +6,21 @@
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 21:59:20 by mharriso          #+#    #+#             */
-/*   Updated: 2020/12/24 17:37:45 by mharriso         ###   ########.fr       */
+/*   Updated: 2020/12/27 16:39:56 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-#define ZERO	0
-#define MIN		1
-#define WID		2
-#define ACC		3
-#define IS_ACC	4
+// #define ZERO	0
+// #define MIN		1
+// #define WID		2
+// #define ACC		3
+// #define IS_ACC	4
 
 #define SPACE	32
-#define ZEROS	48
+#define ZERO	48
 
 #include <stdarg.h>
 #include <unistd.h>
@@ -33,6 +33,8 @@
 typedef struct s_flags
 {
 	char *str;
+	char *prefix;
+	int p_len;
 	int minus;
 	int zero;
 	int width;
