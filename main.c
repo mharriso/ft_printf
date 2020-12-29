@@ -1323,17 +1323,28 @@ int main()
 
 
 	test_basic();
-	char_test();
-	string_test();
-	pointer_test();
-	pointer_github_test();
-	char_github_test();
-	string_github_test();
-	int_github_test();
-	hex_github_test();
-	uint_github_test();
-	new_year();
 
+	// char_test();
+	// string_test();
+	// pointer_test();
+	// pointer_github_test();
+	// char_github_test();
+	// string_github_test();
+	// int_github_test();
+	// hex_github_test();
+	// uint_github_test();
+	// //new_year();
+
+	// ft_printf("null: %.s$\n", NULL);
+	// printf("null: %.s$\n", NULL);
+	// ft_printf("null: %.0s$\n", NULL);
+	// printf("null: %.0s$\n", NULL);
+	// ft_printf("null: %.*s$\n", 0, NULL);
+	// printf("null: %.*s$\n", 0, NULL);
+	printf("%.30p\n", NULL);
+	ft_printf("%.30p\n", NULL);
+	printf("%030p\n", NULL);
+	ft_printf("%030p\n", NULL);
 
 	//check();
 }

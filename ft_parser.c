@@ -6,7 +6,7 @@
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/17 00:20:02 by mharriso          #+#    #+#             */
-/*   Updated: 2020/12/29 16:30:10 by mharriso         ###   ########.fr       */
+/*   Updated: 2020/12/29 18:44:28 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ static	void	save_accuracy(char **format, t_flags *flags, va_list args)
 		flags->acc = ft_atoi(*format);
 	if (**format == '-')
 		(*format)++;
+	if (flags->acc < 0)
+		flags->is_acc = 0;
 }
 
 int				ft_parser(char **format, va_list args, t_flags *flags)

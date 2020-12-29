@@ -6,10 +6,9 @@ CFLAGS	=	-Wall -Wextra -Werror
 
 LIBFT	=	libft
 
-HDRS	=	ft_printf.h ./libft/libft.h
+HDRS	=	./
 
-SRCS	:=	ft_parser.c ft_printf.c converter.c
-
+SRCS	:=	$(wildcard	ft_*.c )
 OBJS	=	$(SRCS:.c=.o)
 
 RM		=	rm -f

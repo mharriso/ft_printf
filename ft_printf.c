@@ -6,7 +6,7 @@
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 00:03:53 by mharriso          #+#    #+#             */
-/*   Updated: 2020/12/29 16:52:55 by mharriso         ###   ########.fr       */
+/*   Updated: 2020/12/29 18:42:09 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	set_order(char *s, t_flags *flags, size_t len)
 		flags->len += write(1, flags->prefix, flags->p_len);
 		print_fill(ZERO, flags->acc, &(flags->len));
 		flags->len += (write(1, s, len));
-		print_fill(SPACE + flags->zero, flags->width, &(flags->len));
+		print_fill(SPACE, flags->width, &(flags->len));
 	}
 	else
 	{
@@ -58,7 +58,7 @@ int		print_char(char c, t_flags *flags)
 
 int		print_string(va_list args, t_flags *flags)
 {
-	size_t	len;
+	int	len;
 	char	*str;
 
 	str = va_arg(args, char *);
@@ -78,7 +78,7 @@ int		print_string(va_list args, t_flags *flags)
 
 int		print_pointer(va_list args, t_flags *flags)
 {
-	flags->str = converter((unsigned long)va_arg(args, unsigned int*), 16, 0, flags);
+	flags->str = ft_converter((unsigned long)va_arg(args, unsigned int*), 16, 0, flags);
 	if (!flags->str)
 		return (-1);
 	flags->prefix = "0x";
@@ -90,7 +90,7 @@ int		print_pointer(va_list args, t_flags *flags)
 int		print_hex(va_list args, t_flags *flags, int reg)
 {
 
-	flags->str = converter(va_arg(args, unsigned int), 16, reg, flags);
+	flags->str = ft_converter(va_arg(args, unsigned int), 16, reg, flags);
 	if (!flags->str)
 		return (-1);
 	set_order(flags->str, flags, ft_strlen(flags->str));
@@ -108,7 +108,7 @@ int		print_int(va_list args, t_flags *flags)
 		flags->p_len = 1;
 		n = -n;
 	}
-	flags->str = converter(n, 10, 0, flags);
+	flags->str = ft_converter(n, 10, 0, flags);
 	if (!flags->str)
 		return (-1);
 	set_order(flags->str, flags, ft_strlen(flags->str));
@@ -117,7 +117,7 @@ int		print_int(va_list args, t_flags *flags)
 
 int		print_unsigned(va_list args, t_flags *flags)
 {
-	flags->str = converter(va_arg(args, unsigned int), 10, 0, flags);
+	flags->str = ft_converter(va_arg(args, unsigned int), 10, 0, flags);
 	if (!flags->str)
 		return (-1);
 	set_order(flags->str, flags, ft_strlen(flags->str));
@@ -145,29 +145,20 @@ int		print_format_arg(char s, va_list args, t_flags *flags)
 		return (print_unsigned(args, flags));
 	if (s == 'x' || s == 'X')
 		return (print_hex(args, flags, s == 'X'));
-	return (0);
+	return (1);
 }
 
-int	parse_and_print(char **format, va_list args, t_flags *flags)
-{
-	if (!**format)
-		return (0);
-	if (ft_parser(format, args, flags) == -1)
-		return (-1);
-	*(format++);
-	if (print_format_arg(**format, args, flags) == -1)
-		return (-1);
-	free(flags->str);
-}
-
-int	ft_printf(const char *format, ...)
+int	ft_printf(const char *form, ...)
 {
 	va_list		args;
 	t_flags		flags;
 	char		*percent;
+	char		*format;
+	int			res;
 
 	flags.len = 0;
-	va_start(args, format);
+	format = (char *)form;
+	va_start(args, form);
 	while (*format)
 	{
 		if ((percent = ft_strchr(format, '%')))
@@ -177,8 +168,13 @@ int	ft_printf(const char *format, ...)
 			if (*format)
 			{
 				ft_parser(&format, args, &flags);
-				print_format_arg(*(format++), args, &flags);
-				free(flags.str);
+				if ((res = print_format_arg(*(format++), args, &flags)) == -1)
+				{
+					va_end(args);
+					return res;
+				}
+				if (res != 1)
+					free(flags.str);
 			}
 		}
 		else

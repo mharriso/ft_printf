@@ -6,7 +6,7 @@
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 21:59:20 by mharriso          #+#    #+#             */
-/*   Updated: 2020/12/28 22:21:56 by mharriso         ###   ########.fr       */
+/*   Updated: 2020/12/29 18:13:06 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_flags
 
 int		ft_printf(const char *format, ...);
 int		ft_parser(char **format, va_list args, t_flags *flags);
-char	*converter(unsigned long n, int base, int reg, t_flags *flags);
+char	*ft_converter(unsigned long n, int base, int reg, t_flags *flags);
 int		print_format_arg(char s, va_list args, t_flags *flags);
 int		ft_abs(int n);
 

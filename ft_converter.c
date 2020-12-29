@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   converter.c                                        :+:      :+:    :+:   */
+/*   ft_converter.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 21:56:26 by mharriso          #+#    #+#             */
-/*   Updated: 2020/12/28 22:14:47 by mharriso         ###   ########.fr       */
+/*   Updated: 2020/12/29 18:18:13 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*converter(unsigned long n, int base, int reg, t_flags *flags)
+char	*ft_converter(unsigned long n, int base, int reg, t_flags *flags)
 {
 	char			*num;
 	int				len;
