@@ -6,7 +6,7 @@
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/17 00:20:02 by mharriso          #+#    #+#             */
-/*   Updated: 2020/12/28 22:58:44 by mharriso         ###   ########.fr       */
+/*   Updated: 2020/12/29 16:30:10 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,9 @@
 // -0.*
 //%-0-----21.42d
 
-int	ft_parser(char **format, va_list args, t_flags *flags)
+static	void	save_flags(char **format, t_flags *flags)
 {
-	ft_memset(flags, 0, sizeof(t_flags) - 8);
-	flags->prefix = "";
-	while (**format == '-' || **format == '0') //ft_strchr("-0#+ ", **format)
+	while (ft_strchr("-0#+ ", **format))
 	{
 		if (**format == '0')
 			flags->zero = 16;
@@ -29,6 +27,10 @@ int	ft_parser(char **format, va_list args, t_flags *flags)
 			flags->minus = 1;
 		(*format)++;
 	}
+}
+
+static	void	save_width(char **format, t_flags *flags, va_list args)
+{
 	if (ft_isdigit(**format))
 		flags->width = ft_atoi(*format);
 	if (**format == '*')
@@ -41,8 +43,10 @@ int	ft_parser(char **format, va_list args, t_flags *flags)
 		flags->width = -flags->width;
 		flags->minus = 1;
 	}
-	while (ft_isdigit(**format))
-		(*format)++;
+}
+
+static	void	save_accuracy(char **format, t_flags *flags, va_list args)
+{
 	if (**format == '.')
 	{
 		flags->is_acc = 1;
@@ -57,6 +61,17 @@ int	ft_parser(char **format, va_list args, t_flags *flags)
 		flags->acc = ft_atoi(*format);
 	if (**format == '-')
 		(*format)++;
+}
+
+int				ft_parser(char **format, va_list args, t_flags *flags)
+{
+	ft_memset(flags, 0, sizeof(t_flags) - 8);
+	flags->prefix = "";
+	save_flags(format, flags);
+	save_width(format, flags, args);
+	while (ft_isdigit(**format))
+		(*format)++;
+	save_accuracy(format, flags, args);
 	while (ft_isdigit(**format))
 		(*format)++;
 	return (0);

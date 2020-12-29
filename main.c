@@ -19,12 +19,13 @@
 #define BMAGENTA "\033[45m"
 #define BCYAN    "\033[46m"
 #define BWHITE   "\033[47;30m" //комбинация двух параметров: черный текст на белом фоне
-void error(int c1, int c2)
+
+void	error(int c1, int c2)
 {
 	if (c1 != c2)
 		printf(RED"******************************** ERROR! ********************************\nprintf_%d | ft_printf_%d"RESET"\n\n", c1, c2);
 }
-void check()
+void	check()
 {
 	char *str = "Hello World!:)";
 	printf("%.*c$\n", 21, 'A');
@@ -38,8 +39,37 @@ void check()
 	printf("%020s$\n", str);
 	printf("%20.*s$\n", -5, str);
 	printf("%------------60d", 21);
+	int n = 1;
+	ft_printf(NULL);
+	printf(NULL);
+	printf("%+d\n", -12345);
+	printf("%+d\n", 12345);
+	printf("%+p\n", &n);
+	printf("%+p\n", NULL);
+	printf("%+u\n", 42);
+	printf("%+u\n", -1);
+	printf("%+x\n", 42);
+	printf("%+X\n", -1);
+	printf("% +d\n", -12345);
+	printf("% +d\n", 12345);
+	printf("% +p\n", &n);
+	printf("% +p\n", NULL);
+	printf("% +u\n", 42);
+	printf("% +u\n", -1);
+	printf("% +x\n", 42);
+	printf("% +X\n", -1);
+	printf("%# +d\n", -12345);
+	printf("%# +d\n", 12345);
+	printf("%# +p\n", &n);
+	printf("%# +p\n", NULL);
+	printf("%# +u\n", 42);
+	printf("%# +u\n", -1);
+	printf("%# +x\n", 42);
+	printf("%# +X\n", -1);
+	printf("%                  d\n", 12345);
+	printf("% +#5X$\n", 1234);
 }
-void char_test()
+void	char_test()
 {
 	int a, b;
 	printf("\n"GREEN"----------------------------------CHAR---------------------------------"RESET"\n");
@@ -65,7 +95,7 @@ void char_test()
 	a = ft_printf("char: %*c$\n", -1, 'A');
 	error(a, b);
 }
-void string_test()
+void	string_test()
 {
 	int a, b;
 	char *s = "Happy new year!:)";
@@ -113,7 +143,7 @@ void string_test()
 	// b = ft_printf("%.-10s$\n", s);
 	// error(a, b);
 }
-void pointer_test()
+void	pointer_test()
 {
 	int a, b;
 	char *s = "Happy new year!:)";
@@ -140,7 +170,7 @@ void pointer_test()
 	error(a, b);
 
 }
-void test_basic()
+void	test_basic()
 {
 	int a, b;
 	int p = 1;
@@ -191,7 +221,7 @@ void test_basic()
 	b = ft_printf("HEX: %x$ %x$ %X$\n", -1,  123456, 799999);
 	error(a, b);
 }
-void char_github_test()
+void	char_github_test()
 {
 	int c1;
 	int c2;
@@ -253,7 +283,7 @@ void char_github_test()
 	c2 = ft_printf("%-0c, %-01c, %-03c, %-010c\n", 'a', 'a', 'a', 'a');
 	error(c1, c2);
 }
-void string_github_test()
+void	string_github_test()
 {
 	char str[100];
 	char str1[100];
@@ -549,7 +579,7 @@ void string_github_test()
 	// c1 = printf("|%%-0s|%%-05s|%%-00s|%%-0.s|%%-0.0s|%%-0.7s|    |%-0s|%-05s|%-00s|%-0.s|%-0.0s|%-0.7s|\n", str1, str1, str1, str1, str1, str1);
 	// error(c1, c2);
 }
-void pointer_github_test()
+void	pointer_github_test()
 {
 	int c1;
 	int c2;
@@ -612,7 +642,7 @@ void pointer_github_test()
 	c2 = ft_printf("|%.p|%.3p|%.5p|%5.10p|\n", NULL, NULL, NULL, NULL);
 	error(c1, c2);
 }
-void int_github_test()
+void	int_github_test()
 {
 	int c1;
 	int c2;
@@ -816,7 +846,7 @@ void int_github_test()
 	// error(c1, c2);
 	// printf("\n");
 }
-void hex_github_test()
+void	hex_github_test()
 {
 		int c1;
 	int c2;
@@ -1021,7 +1051,7 @@ void hex_github_test()
 	// error(c1, c2);
 	// printf("\n");
 }
-void uint_github_test()
+void	uint_github_test()
 {
 		int c1;
 	int c2;
@@ -1257,25 +1287,53 @@ void uint_github_test()
 	// error(c1, c2);
 	// printf("\n");
 }
+void	tree(int n, char *shift)
+{
+	char *spaces;
+
+	ft_printf(YELLOW"%s%*s%s\n", shift, n + 1, "*", RESET);
+	ft_printf(YELLOW"%s%*s%s\n", shift, n + 2, "***", RESET);
+	for(int i = 0; i < n; i++)
+	{
+		ft_printf("%s%*s", shift, n - i, "");
+		for(int j = 0; j < i * 2 + 1; j++)
+			ft_printf(BGREEN" "RESET);
+		ft_printf("\n");
+	}
+	asprintf(&spaces, "%s%*s", shift, n - 1, "");
+	ft_printf("%s%s%s%s\n", spaces, BYELLOW, "   ", RESET);
+	ft_printf("%s%s%s%s\n", spaces, BYELLOW, "   ", RESET);
+
+}
+void	new_year()
+{
+	int n = 10;
+	char *shift;
+	for(int i = 0; i < 5000; i++)
+	{
+
+		asprintf(&shift,"%*s", n * i%6 * n * 3, "");
+		tree(n, shift);
+		sleep(1);
+	}
+}
+
 int main()
 {
 
-	// test_basic();
-	// char_test();
-	// string_test();
-	// pointer_test();
-	// pointer_github_test();
-	// char_github_test();
-	// string_github_test();
-	// int_github_test();
-	// hex_github_test();
-	// uint_github_test();
 
-	ft_printf(NULL);
-	//printf(NULL);
-	// printf("% d\n", -12345);
-	// printf("% +d\n", 12345);
-	// printf("%                  d\n", 12345);
-	// printf("% +#5X$\n", 1234);
+	test_basic();
+	char_test();
+	string_test();
+	pointer_test();
+	pointer_github_test();
+	char_github_test();
+	string_github_test();
+	int_github_test();
+	hex_github_test();
+	uint_github_test();
+	new_year();
+
+
 	//check();
 }

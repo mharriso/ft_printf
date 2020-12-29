@@ -6,45 +6,43 @@
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 00:03:53 by mharriso          #+#    #+#             */
-/*   Updated: 2020/12/28 23:19:51 by mharriso         ###   ########.fr       */
+/*   Updated: 2020/12/29 16:52:55 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void ft_putch(char *s, int l, int *len)
+void	print_fill(char c, int amt, int *len)
 {
-	(*len) += write(1, s, l);
-}
-//ft_putch(&c, &(flags->len));
-
-void	print_fill(char c, int amt, size_t str_len, int *len)
-{
-	if ((amt = amt - str_len) < 0)
-		amt = 0;
 	(*len) += amt;
 	while (amt--)
 		write(1, &c, 1);
 }
 
+void	set_format(t_flags *flags, int len)
+{
+	if ((flags->acc = flags->acc - len) < 0)
+		flags->acc = 0;
+	len += flags->acc + flags->p_len;
+	if ((flags->width = flags->width - len) < 0)
+		flags->width = 0;
+}
+
 void	set_order(char *s, t_flags *flags, size_t len)
 {
-	int a;
-
-	if ((a = flags->acc - len) < 0)
-		a = 0;
+	set_format(flags, len);
 	if (flags->minus)
 	{
 		flags->len += write(1, flags->prefix, flags->p_len);
-		print_fill(ZERO, flags->acc, len, &(flags->len));
+		print_fill(ZERO, flags->acc, &(flags->len));
 		flags->len += (write(1, s, len));
-		print_fill(SPACE + flags->zero, flags->width, len + flags->p_len + a, &(flags->len));
+		print_fill(SPACE + flags->zero, flags->width, &(flags->len));
 	}
 	else
 	{
-		print_fill(SPACE + flags->zero, flags->width, len + flags->p_len + a, &(flags->len));
+		print_fill(SPACE + flags->zero, flags->width, &(flags->len));
 		flags->len += write(1, flags->prefix, flags->p_len);
-		print_fill(ZERO, flags->acc, len, &(flags->len));
+		print_fill(ZERO, flags->acc, &(flags->len));
 		flags->len += (write(1, s, len));
 	}
 }
@@ -78,9 +76,9 @@ int		print_string(va_list args, t_flags *flags)
 	return (0);
 }
 
-int	print_pointer(va_list args, t_flags *flags)
+int		print_pointer(va_list args, t_flags *flags)
 {
-	flags->str = converter(va_arg(args, unsigned int*), 16, 0, flags);
+	flags->str = converter((unsigned long)va_arg(args, unsigned int*), 16, 0, flags);
 	if (!flags->str)
 		return (-1);
 	flags->prefix = "0x";
@@ -89,7 +87,7 @@ int	print_pointer(va_list args, t_flags *flags)
 	return (0);
 }
 
-int	print_hex(va_list args, t_flags *flags, int reg)
+int		print_hex(va_list args, t_flags *flags, int reg)
 {
 
 	flags->str = converter(va_arg(args, unsigned int), 16, reg, flags);
@@ -99,7 +97,7 @@ int	print_hex(va_list args, t_flags *flags, int reg)
 	return (0);
 }
 
-int	print_int(va_list args, t_flags *flags)
+int		print_int(va_list args, t_flags *flags)
 {
 	long int		n;
 
@@ -117,7 +115,7 @@ int	print_int(va_list args, t_flags *flags)
 	return (0);
 }
 
-int	print_unsigned(va_list args, t_flags *flags)
+int		print_unsigned(va_list args, t_flags *flags)
 {
 	flags->str = converter(va_arg(args, unsigned int), 10, 0, flags);
 	if (!flags->str)
@@ -148,6 +146,18 @@ int		print_format_arg(char s, va_list args, t_flags *flags)
 	if (s == 'x' || s == 'X')
 		return (print_hex(args, flags, s == 'X'));
 	return (0);
+}
+
+int	parse_and_print(char **format, va_list args, t_flags *flags)
+{
+	if (!**format)
+		return (0);
+	if (ft_parser(format, args, flags) == -1)
+		return (-1);
+	*(format++);
+	if (print_format_arg(**format, args, flags) == -1)
+		return (-1);
+	free(flags->str);
 }
 
 int	ft_printf(const char *format, ...)
