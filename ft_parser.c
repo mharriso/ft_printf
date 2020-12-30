@@ -6,16 +6,11 @@
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/17 00:20:02 by mharriso          #+#    #+#             */
-/*   Updated: 2020/12/29 18:44:28 by mharriso         ###   ########.fr       */
+/*   Updated: 2020/12/30 18:38:48 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-
-// cspdiuxX%
-// -0.*
-//%-0-----21.42d
 
 static	void	save_flags(char **format, t_flags *flags)
 {

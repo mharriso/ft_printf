@@ -587,7 +587,7 @@ void	pointer_github_test()
 	printf(GREEN"\n\n\n__________________________________________________________________________________\n");
 	printf("\nTEST_ADDRESS"RESET"\n\n");
 	char a;
-	char *ptr;
+	char *ptr = NULL;
 	a = 0;
 	printf("\n\nTest with NULL:\n");
 	c1 = printf(">|%p|%5p|%10p|%.p|\n", NULL, NULL, NULL, NULL);
@@ -1322,8 +1322,8 @@ int main()
 {
 
 
-	test_basic();
-
+	//test_basic();
+	//int a = 0, b = 0;
 	// char_test();
 	// string_test();
 	// pointer_test();
@@ -1333,18 +1333,24 @@ int main()
 	// int_github_test();
 	// hex_github_test();
 	// uint_github_test();
-	// //new_year();
-
+	//new_year();
 	// ft_printf("null: %.s$\n", NULL);
 	// printf("null: %.s$\n", NULL);
 	// ft_printf("null: %.0s$\n", NULL);
 	// printf("null: %.0s$\n", NULL);
 	// ft_printf("null: %.*s$\n", 0, NULL);
 	// printf("null: %.*s$\n", 0, NULL);
-	printf("%.30p\n", NULL);
-	ft_printf("%.30p\n", NULL);
-	printf("%030p\n", NULL);
-	ft_printf("%030p\n", NULL);
+	// printf("%.30p\n", NULL);
+	// ft_printf("%.30p\n", NULL);
+	// printf("%-------------030p\n", NULL);
+	// ft_printf("HELLO %030p\n %d", &n, 12);
+	// a = printf("%.*d\n", INT_MIN, 99);
+	// //b = ft_printf("%*d\n", INT_MIN, 99);
+	// printf("\n%d %d\n", a, b);
+
+	printf("Hello %-------------5.3d$\n", 1);
+	printf("Hello %-------------*.3d$\n", 20, 1);
+	printf("Hello\n");
 
 	//check();
 }
