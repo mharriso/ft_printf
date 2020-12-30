@@ -8,7 +8,8 @@ LIBFT	=	libft
 
 HDRS	=	./
 
-SRCS	:=	$(wildcard	ft_*.c )
+SRCS	:=	ft_printf.c ft_printf_utils.c print_chars.c \
+			print_digits.c ft_parser.c ft_converter.c
 OBJS	=	$(SRCS:.c=.o)
 
 RM		=	rm -f

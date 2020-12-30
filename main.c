@@ -1,5 +1,7 @@
 #include "ft_printf.h"
 #include <stdio.h>
+# include <string.h> //delete
+# include <limits.h> //delete
 
 #define RESET   "\033[0m"  //все атрибуты по умолчанию
 #define BLACK   "\033[30m"  //30-37 цвет текста
@@ -1321,9 +1323,8 @@ void	new_year()
 int main()
 {
 
-
-	//test_basic();
 	//int a = 0, b = 0;
+	// test_basic();
 	// char_test();
 	// string_test();
 	// pointer_test();
@@ -1333,7 +1334,7 @@ int main()
 	// int_github_test();
 	// hex_github_test();
 	// uint_github_test();
-	//new_year();
+	// new_year();
 	// ft_printf("null: %.s$\n", NULL);
 	// printf("null: %.s$\n", NULL);
 	// ft_printf("null: %.0s$\n", NULL);
@@ -1348,9 +1349,11 @@ int main()
 	// //b = ft_printf("%*d\n", INT_MIN, 99);
 	// printf("\n%d %d\n", a, b);
 
-	printf("Hello %-------------5.3d$\n", 1);
-	printf("Hello %-------------*.3d$\n", 20, 1);
-	printf("Hello\n");
+	//printf("Hello %-------------5.3d$\n", 1);
+	// ft_printf("Hello |%--10.5%|\n");
+	// printf("Hello |%--10.5%|\n");
+	ft_printf("%x\n", 999);
 
 	//check();
+	 //ft_printf("Hello |%.*d|\n", INT_MAX, 23);
 }
