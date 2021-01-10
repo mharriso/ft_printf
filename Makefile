@@ -19,7 +19,7 @@ all:	$(NAME)
 $(NAME):	$(OBJS)
 		make -C $(LIBFT)
 		cp libft/libft.a ./$(NAME)
-		ar	rcs	$(NAME)	$(OBJS)
+		ar	rcs	$(NAME)	$?
 
 bonus: $(NAME)
 

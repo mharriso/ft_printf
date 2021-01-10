@@ -1336,11 +1336,12 @@ typedef	struct	s_f
 int main()
 {
 	int n = 0;
+	//ft_printf("%d", 999, "hello");
 	//int a = 0, b = 0;
-	// test_basic();
-	// char_test();
-	// string_test();
-	// pointer_test();
+	test_basic();
+	char_test();
+	string_test();
+	pointer_test();
 	// pointer_github_test();
 	// char_github_test();
 	// string_github_test();
@@ -1376,9 +1377,9 @@ int main()
 	// 	ft_printf("space: |% 20d|\n", -999);
 	// 	ft_printf("space: |%+20d|\n", 999);
 	// 	ft_printf("space: |%#20x|\n", -999);
-	printf("space: X |%#X|\n", 0);
-	printf("space: x |%#x|\n", 0);
-	printf("%#.x %#.0x\n", 0, 0);
+	// printf("space: X |%#X|\n", 0);
+	// printf("space: x |%#x|\n", 0);
+	// printf("%#.x %#.0x\n", 0, 0);
 	// printf("space: u |% 020u|\n", 1);
 	// printf("space: d |% 020d|\n", -1);
 	// printf("space: i |% 020i|\n", -1);
@@ -1388,9 +1389,9 @@ int main()
 	// printf("space:   |% 020p|\n", &n);
 	// printf("space:   |% 020n|\n", &n);
 
-	ft_printf("space: |%#X|\n", 0);
-	ft_printf("space: |%#x|\n", 0);
-	ft_printf("%#.x %#.0x\n", 0, 0);
+	// ft_printf("space: |%#X|\n", 0);
+	// ft_printf("space: |%#x|\n", 0);
+	// ft_printf("%#.x %#.0x\n", 0, 0);
 	// ft_printf("space: |%0+20u|\n", 999);
 	// ft_printf("space: |%0+20d|\n", 999);
 	// ft_printf("space: |%0+20i|\n", 999);
@@ -1399,6 +1400,6 @@ int main()
 	// ft_printf("space: |%0+20%|\n");
 	// ft_printf("space: |%0+20p|\n", &n);
 	// ft_printf("space: |%0+20n|\n", &n);
-	//printf("sizeof: %d\n", sizeof(t_f));
+	printf("|%20.1d|\n", 0);
 	//printf("sizeof char *: %d\n", sizeof(char *));
 }

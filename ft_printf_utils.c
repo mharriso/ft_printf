@@ -6,7 +6,7 @@
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 22:22:18 by mharriso          #+#    #+#             */
-/*   Updated: 2020/12/30 22:55:27 by mharriso         ###   ########.fr       */
+/*   Updated: 2021/01/04 16:58:39 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,30 @@ void			set_order(char *s, t_flags *flags, size_t len)
 		print_fill(ZERO, flags->acc, &(flags->len));
 		flags->len += (write(1, s, len));
 	}
+}
+
+int				print_format_arg(char s, va_list args, t_flags *flags)
+{
+	char c;
+
+	if (s == 'c' || s == '%')
+	{
+		c = (s == '%') ? '%' : (char)va_arg(args, int);
+		return (print_char(c, flags));
+	}
+	if (s == 's')
+		return (print_string(args, flags));
+	if (flags->is_acc)
+		flags->zero = 0;
+	if (s == 'p')
+		return (print_pointer(args, flags));
+	if (s == 'd' || s == 'i')
+		return (print_int(args, flags));
+	if (s == 'u')
+		return (print_unsigned(args, flags));
+	if (s == 'x' || s == 'X')
+		return (print_hex(args, flags, s == 'X'));
+	if (s == 'n')
+		return (save_len(args, flags->len));
+	return (0);
 }
