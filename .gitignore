@@ -54,3 +54,4 @@ ft_printf
 libft/.vscode/c_cpp_properties.json
 libft/.vscode/settings.json
 pft_2019/
+.gitignore
