@@ -1320,28 +1320,13 @@ void	new_year()
 	}
 }
 
-
-typedef	struct	s_f
-{
-	char	*str;
-	char	*prefix;
-	int		p_len;
-	int		minus;
-	int		zero;
-	int		width;
-	int		acc;
-	int		is_acc;
-	int		len;
-}				t_f;
 int main()
 {
 	int n = 0;
-	//ft_printf("%d", 999, "hello");
-	//int a = 0, b = 0;
-	test_basic();
-	char_test();
-	string_test();
-	pointer_test();
+	// test_basic();
+	// char_test();
+	// string_test();
+	// pointer_test();
 	// pointer_github_test();
 	// char_github_test();
 	// string_github_test();
@@ -1349,6 +1334,8 @@ int main()
 	// hex_github_test();
 	// uint_github_test();
 	// new_year();
+
+
 	// ft_printf("null: %.s$\n", NULL);
 	// printf("null: %.s$\n", NULL);
 	// ft_printf("null: %.0s$\n", NULL);
@@ -1388,18 +1375,6 @@ int main()
 	// printf("space:   |% 020%|\n");
 	// printf("space:   |% 020p|\n", &n);
 	// printf("space:   |% 020n|\n", &n);
-
-	// ft_printf("space: |%#X|\n", 0);
-	// ft_printf("space: |%#x|\n", 0);
-	// ft_printf("%#.x %#.0x\n", 0, 0);
-	// ft_printf("space: |%0+20u|\n", 999);
-	// ft_printf("space: |%0+20d|\n", 999);
-	// ft_printf("space: |%0+20i|\n", 999);
-	// ft_printf("space: |%0+20c|\n", 'A');
-	// ft_printf("space: |%0+20s|\n", "abc");
-	// ft_printf("space: |%0+20%|\n");
-	// ft_printf("space: |%0+20p|\n", &n);
-	// ft_printf("space: |%0+20n|\n", &n);
-	printf("|%20.1d|\n", 0);
+	//printf("|%20.1d|\n", 0);
 	//printf("sizeof char *: %d\n", sizeof(char *));
 }
