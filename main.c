@@ -161,6 +161,7 @@ void	pointer_test()
 	error(a, b);
 	a = printf("%-40.23p$\n", NULL);
 	b = ft_printf("%-40.23p$\n", NULL);
+	error(a, b);
 	a = printf("%-4.2p$\n", &s);
 	b = ft_printf("%-4.2p$\n", &s);
 	error(a, b);
