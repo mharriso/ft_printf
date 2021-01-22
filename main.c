@@ -1320,10 +1320,28 @@ void	new_year()
 	}
 }
 
+void	tag_test()
+{
+	int a, b;
+	int n = 0;
+
+	a =    printf("|%-#20.0d|\n", n);
+	b = ft_printf("|%-#20.0d|\n", n);		error(a, b);
+	a =    printf("|%-#20.0i|\n", n);
+	b = ft_printf("|%-#20.0i|\n", n);		error(a, b);
+	a =    printf("|%-#20.0x|\n", n);
+	b = ft_printf("|%-#20.0x|\n", n);		error(a, b);
+	a =    printf("|%-#20.0X|\n", n);
+	b = ft_printf("|%-#20.0X|\n", n);		error(a, b);
+	a =    printf("|%-#20.0u|\n", n);
+	b = ft_printf("|%-#20.0u|\n", n);		error(a, b);
+
+}
+
 int main()
 {
-	int n = 0;
-	// test_basic();
+	//int a, b;
+	test_basic();
 	// char_test();
 	// string_test();
 	// pointer_test();
@@ -1334,47 +1352,5 @@ int main()
 	// hex_github_test();
 	// uint_github_test();
 	// new_year();
-
-
-	// ft_printf("null: %.s$\n", NULL);
-	// printf("null: %.s$\n", NULL);
-	// ft_printf("null: %.0s$\n", NULL);
-	// printf("null: %.0s$\n", NULL);
-	// ft_printf("null: %.*s$\n", 0, NULL);
-	// printf("null: %.*s$\n", 0, NULL);
-	// printf("%.30p\n", NULL);
-	// ft_printf("%.30p\n", NULL);
-	// printf("%-------------030p\n", NULL);
-	// ft_printf("HELLO %030p\n %d", &n, 12);
-	// a = printf("%.*d\n", INT_MIN, 99);
-	// //b = ft_printf("%*d\n", INT_MIN, 99);
-	// printf("\n%d %d\n", a, b);
-
-	//printf("Hello %-------------5.3d$\n", 1);
-	// ft_printf("Hello |%--10.5%|\n");
-	// printf("Hello |%--10.5%|\n");
-	//ft_printf("%x\n", 999);
-
-	//check();
-	 //ft_printf("Hello |%.*d|\n", INT_MAX, 23);
-
-	//ft_printf("Hello***%n***\n", &n);
-	//   ft_printf("n = %d\n", n);
-	// 	ft_printf("space: |% 20d|\n", 999);
-	// 	ft_printf("space: |% 20d|\n", -999);
-	// 	ft_printf("space: |%+20d|\n", 999);
-	// 	ft_printf("space: |%#20x|\n", -999);
-	// printf("space: X |%#X|\n", 0);
-	// printf("space: x |%#x|\n", 0);
-	// printf("%#.x %#.0x\n", 0, 0);
-	// printf("space: u |% 020u|\n", 1);
-	// printf("space: d |% 020d|\n", -1);
-	// printf("space: i |% 020i|\n", -1);
-	// printf("space:   |% 020c|\n", 'A');
-	// printf("space:   |% 020s|\n", "abc");
-	// printf("space:   |% 020%|\n");
-	// printf("space:   |% 020p|\n", &n);
-	// printf("space:   |% 020n|\n", &n);
-	//printf("|%20.1d|\n", 0);
-	//printf("sizeof char *: %d\n", sizeof(char *));
+	// tag_test();
 }
