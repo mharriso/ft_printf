@@ -6,7 +6,7 @@
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/17 00:20:02 by mharriso          #+#    #+#             */
-/*   Updated: 2021/01/03 19:36:33 by mharriso         ###   ########.fr       */
+/*   Updated: 2021/01/26 00:18:03 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,14 @@ static	void	save_flags(char **format, t_flags *flags)
 
 static	void	save_width(char **format, t_flags *flags, va_list args)
 {
-	if (ft_isdigit(**format))
-		flags->width = ft_atoi(*format);
 	if (**format == '*')
 	{
 		flags->width = va_arg(args, int);
+		(*format)++;
+	}
+	while(ft_isdigit(**format))
+	{
+		flags->width = flags->width * 10 + **format - '0';
 		(*format)++;
 	}
 	if (flags->width < 0)
@@ -58,8 +61,11 @@ static	void	save_accuracy(char **format, t_flags *flags, va_list args)
 		flags->acc = va_arg(args, int);
 		(*format)++;
 	}
-	else
-		flags->acc = ft_atoi(*format);
+	while(ft_isdigit(**format))
+	{
+		flags->acc = flags->acc * 10 + **format - '0';
+		(*format)++;
+	}
 	if (**format == '-')
 		(*format)++;
 	if (flags->acc < 0)
@@ -69,13 +75,8 @@ static	void	save_accuracy(char **format, t_flags *flags, va_list args)
 int				ft_parser(char **format, va_list args, t_flags *flags)
 {
 	ft_memset(flags, 0, sizeof(t_flags) - 4);
-	flags->prefix = "";
 	save_flags(format, flags);
 	save_width(format, flags, args);
-	while (ft_isdigit(**format))
-		(*format)++;
 	save_accuracy(format, flags, args);
-	while (ft_isdigit(**format))
-		(*format)++;
 	return (0);
 }
