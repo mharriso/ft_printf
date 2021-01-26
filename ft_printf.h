@@ -6,7 +6,7 @@
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 21:59:20 by mharriso          #+#    #+#             */
-/*   Updated: 2021/01/03 19:33:04 by mharriso         ###   ########.fr       */
+/*   Updated: 2021/01/26 22:33:27 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,6 @@ int				print_hex(va_list args, t_flags *flags, int reg);
 int				print_int(va_list args, t_flags *flags);
 int				print_unsigned(va_list args, t_flags *flags);
 int				save_len(va_list args, int len);
-void			set_order(char *s, t_flags *flags, size_t len);
+void			set_order(t_flags *flags, size_t len);
 
 #endif

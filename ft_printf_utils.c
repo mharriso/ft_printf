@@ -6,7 +6,7 @@
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 22:22:18 by mharriso          #+#    #+#             */
-/*   Updated: 2021/01/04 16:58:39 by mharriso         ###   ########.fr       */
+/*   Updated: 2021/01/26 22:33:03 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ static	void	set_format(t_flags *flags, int len)
 		flags->width = 0;
 }
 
-void			set_order(char *s, t_flags *flags, size_t len)
+void			set_order(t_flags *flags, size_t len)
 {
 	set_format(flags, len);
 	if (flags->minus)
 	{
 		flags->len += write(1, flags->prefix, flags->p_len);
 		print_fill(ZERO, flags->acc, &(flags->len));
-		flags->len += (write(1, s, len));
+		flags->len += (write(1, flags->str, len));
 		print_fill(SPACE, flags->width, &(flags->len));
 	}
 	else
@@ -48,7 +48,7 @@ void			set_order(char *s, t_flags *flags, size_t len)
 		print_fill(SPACE + flags->zero, flags->width, &(flags->len));
 		flags->len += write(1, flags->prefix, flags->p_len);
 		print_fill(ZERO, flags->acc, &(flags->len));
-		flags->len += (write(1, s, len));
+		flags->len += (write(1, flags->str, len));
 	}
 }
 
