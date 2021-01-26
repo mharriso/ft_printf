@@ -6,7 +6,7 @@
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/17 00:20:02 by mharriso          #+#    #+#             */
-/*   Updated: 2021/01/26 00:18:03 by mharriso         ###   ########.fr       */
+/*   Updated: 2021/01/26 23:13:49 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static	void	save_width(char **format, t_flags *flags, va_list args)
 		flags->width = va_arg(args, int);
 		(*format)++;
 	}
-	while(ft_isdigit(**format))
+	while (ft_isdigit(**format))
 	{
 		flags->width = flags->width * 10 + **format - '0';
 		(*format)++;
@@ -61,7 +61,7 @@ static	void	save_accuracy(char **format, t_flags *flags, va_list args)
 		flags->acc = va_arg(args, int);
 		(*format)++;
 	}
-	while(ft_isdigit(**format))
+	while (ft_isdigit(**format))
 	{
 		flags->acc = flags->acc * 10 + **format - '0';
 		(*format)++;

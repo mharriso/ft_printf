@@ -6,7 +6,7 @@
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 22:15:30 by mharriso          #+#    #+#             */
-/*   Updated: 2021/01/26 22:31:03 by mharriso         ###   ########.fr       */
+/*   Updated: 2021/01/26 23:17:28 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,5 @@ int		print_string(va_list args, t_flags *flags)
 		len = flags->acc;
 	flags->acc = 0;
 	set_order(flags, len);
-	return (0);
+	return (1);
 }
