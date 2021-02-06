@@ -61,3 +61,4 @@ ft_printf_test
 .gitignore
 print_digits.c
 42TESTERS-PRINTF
+.DS_Store
