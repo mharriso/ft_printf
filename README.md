@@ -28,7 +28,7 @@ Flags:			`[-0.* #]` and minimum field width with all conversions
 
 `./test`
 
-### Surprise test
+### 🎁 Surprise test
 
 `make surprise`
 
