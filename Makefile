@@ -4,6 +4,12 @@ NAME	=	libftprintf.a
 
 CFLAGS	=	-Wall -Wextra -Werror
 
+TESTNAME = test
+
+TESTFLAGS = -Wno-format
+
+TESTFILES = main_test.c
+
 LIBFT	=	libft
 
 HDRS	=	./
@@ -26,12 +32,19 @@ bonus: $(NAME)
 .c.o:
 		$(CC) $(CFLAGS) -I $(HDRS) -c $< -o $(<:.c=.o)
 
+test:	all
+
+		$(CC) $(TESTFLAGS) $(TESTFILES) $(NAME) $(OBJS) -o $(TESTNAME)
+
+surprise: all
+		$(CC) surprise_test.c $(NAME) $(OBJS) -o surprise
+
 clean:
 		$(RM) $(OBJS)
 		make clean -C $(LIBFT)
 
 fclean:	clean
-		$(RM) $(NAME)
+		$(RM) $(NAME) $(TESTNAME) surprise
 		make fclean -C $(LIBFT)
 
 re:		fclean all

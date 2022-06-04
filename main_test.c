@@ -1,7 +1,7 @@
 #include "ft_printf.h"
 #include <stdio.h>
-# include <string.h> //delete
-# include <limits.h> //delete
+#include <string.h> 
+#include <limits.h>
 
 #define RESET   "\033[0m"  //все атрибуты по умолчанию
 #define BLACK   "\033[30m"  //30-37 цвет текста
@@ -1290,41 +1290,11 @@ void	uint_github_test()
 	// error(c1, c2);
 	// printf("\n");
 }
-void	tree(int n, char *shift)
-{
-	char *spaces;
-
-	ft_printf(YELLOW"%s%*s%s\n", shift, n + 1, "*", RESET);
-	ft_printf(YELLOW"%s%*s%s\n", shift, n + 2, "***", RESET);
-	for(int i = 0; i < n; i++)
-	{
-		ft_printf("%s%*s", shift, n - i, "");
-		for(int j = 0; j < i * 2 + 1; j++)
-			ft_printf(BGREEN" "RESET);
-		ft_printf("\n");
-	}
-	asprintf(&spaces, "%s%*s", shift, n - 1, "");
-	ft_printf("%s%s%s%s\n", spaces, BYELLOW, "   ", RESET);
-	ft_printf("%s%s%s%s\n", spaces, BYELLOW, "   ", RESET);
-
-}
-void	new_year()
-{
-	int n = 10;
-	char *shift;
-	for(int i = 0; i < 5000; i++)
-	{
-
-		asprintf(&shift,"%*s", n * i%6 * n * 3, "");
-		tree(n, shift);
-		sleep(1);
-	}
-}
 
 void	tag_test()
 {
 	int a, b;
-	int n = 0;
+	int n = 1;
 
 	a =    printf("|%-#20.0d|\n", n);
 	b = ft_printf("|%-#20.0d|\n", n);		error(a, b);
@@ -1341,17 +1311,16 @@ void	tag_test()
 
 int main()
 {
-	//int a, b;
 	test_basic();
-	// char_test();
-	// string_test();
-	// pointer_test();
-	// pointer_github_test();
-	// char_github_test();
-	// string_github_test();
-	// int_github_test();
-	// hex_github_test();
-	// uint_github_test();
-	// new_year();
-	// tag_test();
+	char_test();
+	string_test();
+	pointer_test();
+	pointer_github_test();
+	char_github_test();
+	string_github_test();
+	int_github_test();
+	hex_github_test();
+	uint_github_test();
+	tag_test();
+
 }
