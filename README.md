@@ -12,6 +12,7 @@ ft_printf is a school 42 project.
 `cd ft_printf`
 
 `make` 
+
 ### Details
 format string:
  `%[flags][width][.precision][length]type`
@@ -21,4 +22,16 @@ format string:
 Conversions:	`[cspdiuxXn%]`
  
 Flags:			`[-0.* #]` and minimum field width with all conversions
+
+### Basic tests
+`make test`
+
+`./test`
+
+### Surprise test
+
+`make surprise`
+
+`./surprise`
+
 
